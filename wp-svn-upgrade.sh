@@ -11,14 +11,14 @@ if [ ! -d $1/.svn ]; then
 fi
 
 VER_CHECK='http://api.wordpress.org/core/version-check/1.4/'
-LANG='zh_TW'
+WP_LANG='zh_TW'
 
 echo '* Checking latest WordPress version...'
 WP_VER=`wget -q $VER_CHECK -O - | head -n 4 | tail -1`
-L10N_VER=`wget -q $VER_CHECK?locale=$LANG -O - | head -n 4 | tail -1`
+L10N_VER=`wget -q $VER_CHECK?locale=$WP_LANG -O - | head -n 4 | tail -1`
 
 echo 'Latest WordPress version: '$WP_VER
-echo 'Latest '$LANG' version: '$L10N_VER
+echo 'Latest '$WP_LANG' version: '$L10N_VER
 echo
 
 echo '* Upgrading WordPress files through subversion...'
@@ -26,11 +26,11 @@ svn switch http://core.svn.wordpress.org/tags/$WP_VER $1
 echo
 
 echo '* Verify the existence of l10n repo with tagged version...'
-L10N_REPO=http://svn.automattic.com/wordpress-i18n/$LANG/tags/$L10N_VER/messages
+L10N_REPO=http://svn.automattic.com/wordpress-i18n/$WP_LANG/tags/$L10N_VER/messages
 wget $L10N_REPO -q -O - > /dev/null
 if [ $? -ne 0 ]; then
 	echo 'Warning: l10n repo with '$L10N_VER' tag does not exist, using files in trunk instead.'
-	L10N_REPO=http://svn.automattic.com/wordpress-i18n/$LANG/trunk/messages
+	L10N_REPO=http://svn.automattic.com/wordpress-i18n/$WP_LANG/trunk/messages
 fi
 echo
 
