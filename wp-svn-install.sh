@@ -16,6 +16,14 @@ VER_CHECK=${PROTOCOL}'://api.wordpress.org/core/version-check/1.4/'
 echo
 echo '* Checking latest WordPress version...'
 WP_VER=`wget -q $VER_CHECK -O - | head -n 4 | tail -1`
+
+if [ -z $WP_VER ]; then
+  echo
+  echo 'Error: Unable to get the latest version number.'
+  echo 'Maybe you should switch the PROTOCOL to http?'
+  exit;
+fi
+
 echo 'Latest WordPress version: '$WP_VER
 
 if [ ! -z $WP_LANG ]; then
