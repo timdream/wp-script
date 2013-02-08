@@ -39,11 +39,11 @@ echo
 
 if [ ! -z $WP_LANG ]; then
   echo '* Verify the existence of l10n repo with tagged version...'
-  L10N_REPO=${PROTOCOL}://svn.automattic.com/wordpress-i18n/$WP_LANG/tags/$L10N_VER/messages
+  L10N_REPO=${PROTOCOL}://svn.automattic.com/wordpress-i18n/$WP_LANG/tags/$L10N_VER/dist/wp-content/languages
   wget $L10N_REPO -q -O - > /dev/null
   if [ $? -ne 0 ]; then
     echo 'Warning: l10n repo with '$L10N_VER' tag does not exist, using files in trunk instead.'
-    L10N_REPO=${PROTOCOL}://svn.automattic.com/wordpress-i18n/$WP_LANG/trunk/messages
+    L10N_REPO=${PROTOCOL}://svn.automattic.com/wordpress-i18n/$WP_LANG/trunk/dist/wp-content/languages
   fi
   echo
 
