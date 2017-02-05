@@ -1,3 +1,6 @@
+Please use [wp-cli](https://wp-cli.org/) instead which is officially supported.
+===============================================================================
+
 wp-script
 =========
 
